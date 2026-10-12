@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.data/
+.codex-schemas/
+docs/upstream-app-server.md
+test-results/
+playwright-report/
+*.log

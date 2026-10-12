@@ -1,0 +1,22 @@
+services:
+  codex-home:
+    build: .
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    environment:
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Set a strong dashboard password in .env}
+      APP_ORIGIN: ${APP_ORIGIN:-http://127.0.0.1:3000}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+    volumes:
+      - home-data:/data
+    # bubblewrap uses unprivileged namespaces; no Docker socket, host mounts or privileged mode.
+    # Docker's default filter blocks namespace creation. The outer container still drops capabilities.
+    security_opt:
+      - seccomp=unconfined
+    cap_drop:
+      - ALL
+    stop_grace_period: 30s
+volumes:
+  home-data:

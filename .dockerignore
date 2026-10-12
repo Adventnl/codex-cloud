@@ -1,0 +1,10 @@
+.git
+.env
+.data
+.codex-schemas
+node_modules
+dist
+test-results
+playwright-report
+*.log
+docs/upstream-app-server.md
